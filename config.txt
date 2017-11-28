@@ -24,3 +24,8 @@ dtoverlay=dwc2
 # Enable the UART (/dev/ttyS0) on the RPi0.
 enable_uart=1
 dtoverlay=pi3-miniuart-bt
+
+# Google Voice Hat
+dtoverlay=i2s-mmap
+dtoverlay=googlevoicehat-soundcard
+dtparam=i2s=on
