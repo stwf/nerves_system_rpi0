@@ -83,7 +83,7 @@ defmodule NervesSystemRpi0.MixProject do
       "post-createfs.sh",
       "post-build.sh",
       "cmdline.txt",
-      "linux-4.4.defconfig",
+      "linux-4.9.defconfig",
       "config.txt"
     ]
   end
