@@ -63,12 +63,26 @@ If you'd like the IEx prompt to come out the UART pins (`ttyAMA0`) or HDMI
 
 ## Supported OTG USB modes
 
-The base image activates the `dwc2` overlay, which allows the Pi Zero to appear
-as a device (aka gadget mode). When plugged into a host computer via the OTG
-port, the Pi Zero will appear as a composite Ethernet and serial device. The
-virtual serial port provides access to the IEx prompt and the Ethernet device
-can be used for firmware updates, Erlang distribution, and anything else running
-over IP.
+The base image activates the `dwc2` overlay and exposes a `usb_gadget` ConfigFS
+interface, which allows the Pi Zero to be configured to appear as a device (aka
+gadget mode). When configured by [`nerves_init_gadget` v1.4.1] or later and
+plugged into a host computer via the OTG port, the Pi Zero will appear as a
+composite of two Ethernet and devices and one serial device. The virtual serial
+port provides access to the IEx prompt and the Ethernet devices can be used for
+firmware updates, Erlang distribution, and anything else running over IP.
+
+When The reason that there are two Ethernet devices is that the first device
+(`usb0`) uses an RNDIS driver, which interoperates with Windows-based hosts.
+The second device (`usb1`) uses an ECM driver, interoperates with Linux- and
+OSX-based hosts. `nerves_init_gadget` also configures Ethernet bonding between
+these two devices, allowing you to treat them as a single `bond0` interface
+that will automatically use the appropriate underlying device to connect to the
+host. Using the [`usb_gadget`] library, you can also configure a variety of
+other USB gadget devices, or customize the devices configured by default in
+`nerves_init_gadget`.
+
+[`nerves_init_gadget` v0.4.1]: https://github.com/nerves-project/nerves_init_gadget/releases/tag/v0.4.1
+[`usb_gadget`]: https://github.com/nerves-project/usb_gadget
 
 ## Supported WiFi devices
 

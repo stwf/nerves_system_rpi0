@@ -10,10 +10,6 @@ defmodule TestTest do
     assert File.exists?("/dev/spidev0.0")
   end
 
-  test "the virtual serial port ttyGS0 exists" do
-    assert File.exists?("/dev/ttyGS0")
-  end
-
   test "the main serial port ttyAMA0 exists" do
     assert File.exists?("/dev/ttyAMA0")
   end
